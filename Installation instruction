@@ -1,0 +1,31 @@
+Перед установкой должны быть установлены: headers, and git
+
+sudo pacman -S linux54(индивидуальное ядро например 54)-headers
+sudo pacman -S git на всякий случай 
+
+перезагрузка 
+-----------------------------------------
+
+mkdir Driver
+cd Driver 
+
+git@github.com:grek97/rtl_8723_de.git
+
+cd rtlwifi_new
+
+sudo pacman -S dkms 
+
+sudo dkms add ../rtlwifi_new
+sudo dkms build rtlwifi-new/0.6 
+sudo dkms install rtlwifi-new/0.6
+sudo modprobe -v rtl8723de ant_sel=2
+sudo /bin/sh -c 'echo "options rtl8723de ant_sel=2" >> /etc/modprobe.d/rtl8723de.conf'
+
+
+Для Debian дистрибутивов:
+ Устанавливаем dkms и заголовки ядра
+
+  sudo apt-get install -y dkms linux-headers-$(uname -r)
+
+=======================
+дальше все как есть 
